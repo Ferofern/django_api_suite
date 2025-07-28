@@ -18,12 +18,10 @@ class LandingAPI(APIView):
         ref = db.reference(self.collection_name)
         new_entry = request.data.copy()
 
-        # Obtener fecha y hora actual
         now = datetime.now()
 
-        # Formatear la fecha según "dd/mm/yyyy, hh:mm:ss a. m./p. m." en español
-        hour_12 = now.strftime("%I").lstrip("0") or "12"  # Quitar cero inicial o poner 12
-        am_pm = now.strftime("%p").lower()  # am o pm en minúsculas
+        hour_12 = now.strftime("%I").lstrip("0") or "12"  
+        am_pm = now.strftime("%p").lower() 
 
         # Reemplazar am/pm por a. m. / p. m.
         am_pm_es = "a. m." if am_pm == "am" else "p. m."
