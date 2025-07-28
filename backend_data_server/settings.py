@@ -38,8 +38,11 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "homepage",  # App registrada aquí
+    "rest_framework",
+    "homepage",
+    "demo_rest_api",  # <--- agregada aquí
 ]
+
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
