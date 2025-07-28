@@ -6,12 +6,34 @@ from datetime import datetime
 
 class LandingAPI(APIView):
     name = "Landing API"
-    collection_name = "formularios_landing"
+    collection_name = "votes"
 
     def get(self, request):
         ref = db.reference(self.collection_name)
         data = ref.get() or {}
-        items = list(data.values()) if isinstance(data, dict) else []
+
+        def formatear_fecha(timestamp):
+            try:
+                # Si ya viene como string con formato, lo devolvemos tal cual
+                if isinstance(timestamp, str) and "a. m." in timestamp or "p. m." in timestamp:
+                    return timestamp
+                # Si es ISO (str) o número (int/float), lo parseamos
+                dt = (
+                    datetime.fromisoformat(timestamp)
+                    if isinstance(timestamp, str)
+                    else datetime.fromtimestamp(timestamp / 1000)
+                )
+                return dt.strftime("%d/%m/%Y, %-I:%M:%S %p").replace("AM", "a. m.").replace("PM", "p. m.")
+            except Exception:
+                return timestamp  # en caso de error, lo devolvemos sin cambios
+
+        items = []
+        if isinstance(data, dict):
+            for key, value in data.items():
+                timestamp = value.get("timestamp")
+                value["timestamp"] = formatear_fecha(timestamp)
+                items.append({"id": key, **value})
+
         return Response(items, status=status.HTTP_200_OK)
 
     def post(self, request):
