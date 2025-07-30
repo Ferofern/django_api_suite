@@ -85,7 +85,7 @@ STATIC_URL = "static/"
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, STATIC_URL), 
 ]
-
+STATIC_ROOT = "assets/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # 🔐 Firebase Admin SDK Configuración
