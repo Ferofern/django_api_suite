@@ -9,7 +9,7 @@ SECRET_KEY = "django-insecure-x0ez-d5f&y0d!!l8o5byt2@z36)(ce9v28xk31wq2-3@vqg0vp
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['ferofern.pythonanywhere.com']
 
 INSTALLED_APPS = [
     "django.contrib.admin",
